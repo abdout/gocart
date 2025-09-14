@@ -5,10 +5,9 @@ import { CircleDollarSignIcon, ShoppingBasketIcon, StarIcon, TagsIcon } from "lu
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import RiyalIcon from "@/components/RiyalIcon"
 
 export default function Dashboard() {
-
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$'
 
     const router = useRouter()
 
@@ -21,10 +20,10 @@ export default function Dashboard() {
     })
 
     const dashboardCardsData = [
-        { title: 'Total Products', value: dashboardData.totalProducts, icon: ShoppingBasketIcon },
-        { title: 'Total Earnings', value: currency + dashboardData.totalEarnings, icon: CircleDollarSignIcon },
-        { title: 'Total Orders', value: dashboardData.totalOrders, icon: TagsIcon },
-        { title: 'Total Ratings', value: dashboardData.ratings.length, icon: StarIcon },
+        { title: 'Total Products', value: dashboardData.totalProducts, icon: ShoppingBasketIcon, showCurrency: false },
+        { title: 'Total Earnings', value: dashboardData.totalEarnings, icon: CircleDollarSignIcon, showCurrency: true },
+        { title: 'Total Orders', value: dashboardData.totalOrders, icon: TagsIcon, showCurrency: false },
+        { title: 'Total Ratings', value: dashboardData.ratings.length, icon: StarIcon, showCurrency: false },
     ]
 
     const fetchDashboardData = async () => {
@@ -48,7 +47,16 @@ export default function Dashboard() {
                         <div key={index} className="flex items-center gap-11 border border-slate-200 p-3 px-6 rounded-lg">
                             <div className="flex flex-col gap-3 text-xs">
                                 <p>{card.title}</p>
-                                <b className="text-2xl font-medium text-slate-700">{card.value}</b>
+                                <b className="text-2xl font-medium text-slate-700">
+                                    {card.showCurrency ? (
+                                        <div className="flex items-center gap-2">
+                                            <RiyalIcon size={18} />
+                                            <span>{card.value}</span>
+                                        </div>
+                                    ) : (
+                                        card.value
+                                    )}
+                                </b>
                             </div>
                             <card.icon size={50} className=" w-11 h-11 p-2.5 text-slate-400 bg-slate-100 rounded-full" />
                         </div>

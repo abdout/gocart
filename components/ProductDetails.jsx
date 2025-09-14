@@ -7,11 +7,11 @@ import { useState } from "react";
 import Image from "next/image";
 import Counter from "./Counter";
 import { useDispatch, useSelector } from "react-redux";
+import RiyalIcon from "./RiyalIcon";
 
 const ProductDetails = ({ product }) => {
 
     const productId = product.id;
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$';
 
     const cart = useSelector(state => state.cart.cartItems);
     const dispatch = useDispatch();
@@ -49,8 +49,14 @@ const ProductDetails = ({ product }) => {
                     <p className="text-sm ml-3 text-slate-500">{product.rating.length} Reviews</p>
                 </div>
                 <div className="flex items-start my-6 gap-3 text-2xl font-semibold text-slate-800">
-                    <p> {currency}{product.price} </p>
-                    <p className="text-xl text-slate-500 line-through">{currency}{product.mrp}</p>
+                    <div className="flex items-center gap-2">
+                        <RiyalIcon size={20} />
+                        <span>{product.price}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xl text-slate-500 line-through">
+                        <RiyalIcon size={16} />
+                        <span>{product.mrp}</span>
+                    </div>
                 </div>
                 <div className="flex items-center gap-2 text-slate-500">
                     <TagIcon size={14} />

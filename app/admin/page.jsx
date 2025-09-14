@@ -4,10 +4,9 @@ import Loading from "@/components/Loading"
 import OrdersAreaChart from "@/components/OrdersAreaChart"
 import { CircleDollarSignIcon, ShoppingBasketIcon, StoreIcon, TagsIcon } from "lucide-react"
 import { useEffect, useState } from "react"
+import RiyalIcon from "@/components/RiyalIcon"
 
 export default function AdminDashboard() {
-
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$'
 
     const [loading, setLoading] = useState(true)
     const [dashboardData, setDashboardData] = useState({
@@ -19,10 +18,10 @@ export default function AdminDashboard() {
     })
 
     const dashboardCardsData = [
-        { title: 'Total Products', value: dashboardData.products, icon: ShoppingBasketIcon },
-        { title: 'Total Revenue', value: currency + dashboardData.revenue, icon: CircleDollarSignIcon },
-        { title: 'Total Orders', value: dashboardData.orders, icon: TagsIcon },
-        { title: 'Total Stores', value: dashboardData.stores, icon: StoreIcon },
+        { title: 'Total Products', value: dashboardData.products, icon: ShoppingBasketIcon, showCurrency: false },
+        { title: 'Total Revenue', value: dashboardData.revenue, icon: CircleDollarSignIcon, showCurrency: true },
+        { title: 'Total Orders', value: dashboardData.orders, icon: TagsIcon, showCurrency: false },
+        { title: 'Total Stores', value: dashboardData.stores, icon: StoreIcon, showCurrency: false },
     ]
 
     const fetchDashboardData = async () => {
@@ -47,7 +46,16 @@ export default function AdminDashboard() {
                         <div key={index} className="flex items-center gap-10 border border-slate-200 p-3 px-6 rounded-lg">
                             <div className="flex flex-col gap-3 text-xs">
                                 <p>{card.title}</p>
-                                <b className="text-2xl font-medium text-slate-700">{card.value}</b>
+                                <b className="text-2xl font-medium text-slate-700">
+                                    {card.showCurrency ? (
+                                        <div className="flex items-center gap-2">
+                                            <RiyalIcon size={18} />
+                                            <span>{card.value}</span>
+                                        </div>
+                                    ) : (
+                                        card.value
+                                    )}
+                                </b>
                             </div>
                             <card.icon size={50} className=" w-11 h-11 p-2.5 text-slate-400 bg-slate-100 rounded-full" />
                         </div>

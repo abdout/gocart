@@ -4,10 +4,9 @@ import AddressModal from './AddressModal';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import RiyalIcon from './RiyalIcon';
 
 const OrderSummary = ({ totalPrice, items }) => {
-
-    const currency = process.env.NEXT_PUBLIC_CURRENCY_SYMBOL || '$';
 
     const router = useRouter();
 
@@ -77,9 +76,16 @@ const OrderSummary = ({ totalPrice, items }) => {
                         {coupon && <p>Coupon:</p>}
                     </div>
                     <div className='flex flex-col gap-1 font-medium text-right'>
-                        <p>{currency}{totalPrice.toLocaleString()}</p>
+                        <div className="flex items-center gap-1">
+                            <RiyalIcon size={12} />
+                            <span>{totalPrice.toLocaleString()}</span>
+                        </div>
                         <p>Free</p>
-                        {coupon && <p>{`-${currency}${(coupon.discount / 100 * totalPrice).toFixed(2)}`}</p>}
+                        {coupon && <div className="flex items-center gap-1">
+                            <span>-</span>
+                            <RiyalIcon size={12} />
+                            <span>{(coupon.discount / 100 * totalPrice).toFixed(2)}</span>
+                        </div>}
                     </div>
                 </div>
                 {
@@ -99,7 +105,10 @@ const OrderSummary = ({ totalPrice, items }) => {
             </div>
             <div className='flex justify-between py-4'>
                 <p>Total:</p>
-                <p className='font-medium text-right'>{currency}{coupon ? (totalPrice - (coupon.discount / 100 * totalPrice)).toFixed(2) : totalPrice.toLocaleString()}</p>
+                <div className="flex items-center gap-1 font-medium">
+                    <RiyalIcon size={12} />
+                    <span>{coupon ? (totalPrice - (coupon.discount / 100 * totalPrice)).toFixed(2) : totalPrice.toLocaleString()}</span>
+                </div>
             </div>
             <button onClick={e => toast.promise(handlePlaceOrder(e), { loading: 'placing Order...' })} className='w-full bg-slate-700 text-white py-2.5 rounded hover:bg-slate-900 active:scale-95 transition-all'>Place Order</button>
 
