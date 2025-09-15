@@ -6,14 +6,15 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import Counter from "./Counter";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSafeSelector } from "@/lib/hooks/useSafeSelector";
 import RiyalIcon from "./RiyalIcon";
 
 const ProductDetails = ({ product }) => {
 
     const productId = product.id;
 
-    const cart = useSelector(state => state.cart.cartItems);
+    const cart = useSafeSelector(state => state?.cart?.cartItems, []);
     const dispatch = useDispatch();
 
     const router = useRouter()

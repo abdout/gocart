@@ -3,7 +3,7 @@ import { Suspense } from "react"
 import ProductCard from "@/components/ProductCard"
 import { MoveLeftIcon } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useSelector } from "react-redux"
+import { useSafeSelector } from "@/lib/hooks/useSafeSelector"
 
  function ShopContent() {
 
@@ -12,7 +12,7 @@ import { useSelector } from "react-redux"
     const search = searchParams.get('search')
     const router = useRouter()
 
-    const products = useSelector(state => state.product.list)
+    const products = useSafeSelector(state => state?.product?.list, [])
 
     const filteredProducts = search
         ? products.filter(product =>

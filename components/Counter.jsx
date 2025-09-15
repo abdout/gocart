@@ -1,10 +1,11 @@
 'use client'
 import { addToCart, removeFromCart } from "@/lib/features/cart/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSafeSelector } from "@/lib/hooks/useSafeSelector";
 
 const Counter = ({ productId }) => {
 
-    const { cartItems } = useSelector(state => state.cart);
+    const { cartItems } = useSafeSelector(state => state?.cart, { cartItems: {} });
 
     const dispatch = useDispatch();
 

@@ -6,13 +6,14 @@ import { deleteItemFromCart } from "@/lib/features/cart/cartSlice";
 import { Trash2Icon } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSafeSelector } from "@/lib/hooks/useSafeSelector";
 import RiyalIcon from "@/components/RiyalIcon";
 
 export default function Cart() {
     
-    const { cartItems } = useSelector(state => state.cart);
-    const products = useSelector(state => state.product.list);
+    const { cartItems } = useSafeSelector(state => state?.cart, { cartItems: {} });
+    const products = useSafeSelector(state => state?.product?.list, []);
 
     const dispatch = useDispatch();
 

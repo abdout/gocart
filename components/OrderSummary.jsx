@@ -1,7 +1,7 @@
 import { PlusIcon, SquarePenIcon, XIcon } from 'lucide-react';
 import React, { useState } from 'react'
 import AddressModal from './AddressModal';
-import { useSelector } from 'react-redux';
+import { useSafeSelector } from '@/lib/hooks/useSafeSelector';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import RiyalIcon from './RiyalIcon';
@@ -10,7 +10,7 @@ const OrderSummary = ({ totalPrice, items }) => {
 
     const router = useRouter();
 
-    const addressList = useSelector(state => state.address.list);
+    const addressList = useSafeSelector(state => state?.address?.list, []);
 
     const [paymentMethod, setPaymentMethod] = useState('COD');
     const [selectedAddress, setSelectedAddress] = useState(null);

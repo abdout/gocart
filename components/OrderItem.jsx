@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image";
 import { DotIcon } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useSafeSelector } from "@/lib/hooks/useSafeSelector";
 import Rating from "./Rating";
 import { useState } from "react";
 import RatingModal from "./RatingModal";
@@ -10,7 +10,7 @@ import RiyalIcon from "./RiyalIcon";
 const OrderItem = ({ order }) => {
     const [ratingModal, setRatingModal] = useState(null);
 
-    const { ratings } = useSelector(state => state.rating);
+    const { ratings } = useSafeSelector(state => state?.rating, { ratings: [] });
 
     return (
         <>

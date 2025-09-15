@@ -3,13 +3,13 @@ import ProductDescription from "@/components/ProductDescription";
 import ProductDetails from "@/components/ProductDetails";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSafeSelector } from "@/lib/hooks/useSafeSelector";
 
 export default function Product() {
 
     const { productId } = useParams();
     const [product, setProduct] = useState();
-    const products = useSelector(state => state.product.list);
+    const products = useSafeSelector(state => state?.product?.list, []);
 
     const fetchProduct = async () => {
         const product = products.find((product) => product.id === productId);
