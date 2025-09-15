@@ -1,5 +1,5 @@
 'use client'
-import { Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart, Languages } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -25,7 +25,7 @@ const Navbar = ({ dictionary, currentLocale }) => {
 
                     <Link href={`/${currentLocale}`} className="text-4xl font-semibold text-slate-700">
                         {currentLocale === 'ar' ? (
-                            <span>س<span className="text-green-600">و</span><span className="text-green-600">ق</span></span>
+                            <span>سو<span className="text-green-600">ق</span></span>
                         ) : (
                             <span>sou<span className="text-green-600">q</span></span>
                         )}
@@ -50,14 +50,10 @@ const Navbar = ({ dictionary, currentLocale }) => {
                         </Link>
 
                         {/* Language Switcher */}
-                        <div className="flex gap-2 text-sm">
-                            <Link href={getSwitchLocaleHref('en')} className={`px-2 py-1 rounded ${currentLocale === 'en' ? 'bg-indigo-100 text-indigo-700' : 'hover:bg-gray-100'}`}>
-                                🇺🇸 EN
-                            </Link>
-                            <Link href={getSwitchLocaleHref('ar')} className={`px-2 py-1 rounded ${currentLocale === 'ar' ? 'bg-indigo-100 text-indigo-700' : 'hover:bg-gray-100'}`}>
-                                🇸🇦 AR
-                            </Link>
-                        </div>
+                        <Link href={getSwitchLocaleHref(currentLocale === 'en' ? 'ar' : 'en')} className="flex items-center gap-2 px-3 py-2 text-slate-600 hover:bg-gray-100 rounded-lg transition">
+                            <Languages size={18} />
+                            <span className="text-sm">{currentLocale === 'en' ? 'العربية' : 'English'}</span>
+                        </Link>
 
                         <button className="px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full">
                             {dictionary?.navigation?.login || 'Login'}
@@ -68,14 +64,9 @@ const Navbar = ({ dictionary, currentLocale }) => {
                     {/* Mobile Menu */}
                     <div className="sm:hidden flex items-center gap-3">
                         {/* Language Switcher Mobile */}
-                        <div className="flex gap-1 text-xs">
-                            <Link href={getSwitchLocaleHref('en')} className={`px-2 py-1 rounded ${currentLocale === 'en' ? 'bg-indigo-100 text-indigo-700' : 'hover:bg-gray-100'}`}>
-                                🇺🇸 EN
-                            </Link>
-                            <Link href={getSwitchLocaleHref('ar')} className={`px-2 py-1 rounded ${currentLocale === 'ar' ? 'bg-indigo-100 text-indigo-700' : 'hover:bg-gray-100'}`}>
-                                🇸🇦 AR
-                            </Link>
-                        </div>
+                        <Link href={getSwitchLocaleHref(currentLocale === 'en' ? 'ar' : 'en')} className="flex items-center p-2 text-slate-600 hover:bg-gray-100 rounded-lg transition">
+                            <Languages size={16} />
+                        </Link>
 
                         <button className="px-6 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-sm transition text-white rounded-full">
                             {dictionary?.navigation?.login || 'Login'}

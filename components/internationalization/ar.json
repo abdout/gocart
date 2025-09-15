@@ -20,13 +20,17 @@
     "learnMore": "تعرف على المزيد",
     "bestProducts": "أفضل المنتجات",
     "discounts": "خصومات 20%",
+    "news": "أخبار",
     "banner": {
       "message": "الشحن المجاني على الطلبات أكثر من"
     }
   },
   "products": {
     "title": "أحدث المنتجات",
-    "bestSelling": "الأكثر مبيعاً"
+    "bestSelling": "الأكثر مبيعاً",
+    "showing": "عرض",
+    "of": "من",
+    "products": "منتجات"
   },
   "specs": {
     "title": "مواصفاتنا",
@@ -169,5 +173,13 @@
     "yes": "نعم",
     "no": "لا",
     "ok": "موافق"
+  },
+  "categories": {
+    "Headphones": "سماعات الرأس",
+    "Speakers": "مكبرات الصوت",
+    "Watch": "ساعات",
+    "Earbuds": "سماعات الأذن",
+    "Mouse": "فأرة",
+    "Decoration": "ديكور"
   }
 }
