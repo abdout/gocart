@@ -10,8 +10,8 @@ const BestSelling = ({ dictionary, lang }) => {
     return (
         <div className='px-6 my-30 max-w-6xl mx-auto'>
             <Title
-                title={dictionary?.bestSelling || 'Best Selling'}
-                description={`${dictionary?.showing || 'Showing'} ${products.length < displayQuantity ? products.length : displayQuantity} ${dictionary?.of || 'of'} ${products.length} ${dictionary?.products || 'products'}`}
+                title={dictionary?.products?.bestSelling || 'Best Selling'}
+                description={`${dictionary?.products?.showing || 'Showing'} ${products.length < displayQuantity ? products.length : displayQuantity} ${dictionary?.products?.of || 'of'} ${products.length} ${dictionary?.products?.products || 'products'}`}
                 href={`/${lang}/shop`}
                 dictionary={dictionary}
             />

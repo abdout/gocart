@@ -11,8 +11,8 @@ const LatestProducts = ({ dictionary, lang }) => {
     return (
         <div className='px-6 my-30 max-w-6xl mx-auto'>
             <Title
-                title={dictionary?.title || 'Latest Products'}
-                description={`${dictionary?.showing || 'Showing'} ${products.length < displayQuantity ? products.length : displayQuantity} ${dictionary?.of || 'of'} ${products.length} ${dictionary?.products || 'products'}`}
+                title={dictionary?.products?.title || 'Latest Products'}
+                description={`${dictionary?.products?.showing || 'Showing'} ${products.length < displayQuantity ? products.length : displayQuantity} ${dictionary?.products?.of || 'of'} ${products.length} ${dictionary?.products?.products || 'products'}`}
                 href={`/${lang}/shop`}
                 dictionary={dictionary}
             />
