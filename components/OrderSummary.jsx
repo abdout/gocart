@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import RiyalIcon from './RiyalIcon';
 
-const OrderSummary = ({ totalPrice, items }) => {
+const OrderSummary = ({ totalPrice, items, dictionary = {} }) => {
 
     const router = useRouter();
 
@@ -31,8 +31,8 @@ const OrderSummary = ({ totalPrice, items }) => {
 
     return (
         <div className='w-full max-w-lg lg:max-w-[340px] bg-slate-50/30 border border-slate-200 text-slate-500 text-sm rounded-xl p-7'>
-            <h2 className='text-xl font-medium text-slate-600'>Payment Summary</h2>
-            <p className='text-slate-400 text-xs my-4'>Payment Method</p>
+            <h2 className='text-xl font-medium text-slate-600'>{dictionary.cart?.orderSummary || 'Payment Summary'}</h2>
+            <p className='text-slate-400 text-xs my-4'>{dictionary.cart?.paymentMethod || 'Payment Method'}</p>
             <div className='flex gap-2 items-center'>
                 <input type="radio" id="COD" onChange={() => setPaymentMethod('COD')} checked={paymentMethod === 'COD'} className='accent-gray-500' />
                 <label htmlFor="COD" className='cursor-pointer'>COD</label>
@@ -42,7 +42,7 @@ const OrderSummary = ({ totalPrice, items }) => {
                 <label htmlFor="STRIPE" className='cursor-pointer'>Stripe Payment</label>
             </div>
             <div className='my-4 py-4 border-y border-slate-200 text-slate-400'>
-                <p>Address</p>
+                <p>{dictionary.cart?.address || 'Address'}</p>
                 {
                     selectedAddress ? (
                         <div className='flex gap-2 items-center'>
@@ -54,7 +54,7 @@ const OrderSummary = ({ totalPrice, items }) => {
                             {
                                 addressList.length > 0 && (
                                     <select className='border border-slate-400 p-2 w-full my-3 outline-none rounded' onChange={(e) => setSelectedAddress(addressList[e.target.value])} >
-                                        <option value="">Select Address</option>
+                                        <option value="">{dictionary.cart?.selectAddress || 'Select Address'}</option>
                                         {
                                             addressList.map((address, index) => (
                                                 <option key={index} value={index}>{address.name}, {address.city}, {address.state}, {address.zip}</option>
@@ -63,7 +63,7 @@ const OrderSummary = ({ totalPrice, items }) => {
                                     </select>
                                 )
                             }
-                            <button className='flex items-center gap-1 text-slate-600 mt-1' onClick={() => setShowAddressModal(true)} >Add Address <PlusIcon size={18} /></button>
+                            <button className='flex items-center gap-1 text-slate-600 mt-1' onClick={() => setShowAddressModal(true)} >{dictionary.cart?.addAddress || 'Add Address'} <PlusIcon size={18} /></button>
                         </div>
                     )
                 }
@@ -71,16 +71,16 @@ const OrderSummary = ({ totalPrice, items }) => {
             <div className='pb-4 border-b border-slate-200'>
                 <div className='flex justify-between'>
                     <div className='flex flex-col gap-1 text-slate-400'>
-                        <p>Subtotal:</p>
-                        <p>Shipping:</p>
-                        {coupon && <p>Coupon:</p>}
+                        <p>{dictionary.cart?.subtotal || 'Subtotal'}:</p>
+                        <p>{dictionary.general?.shipping || 'Shipping'}:</p>
+                        {coupon && <p>{dictionary.forms?.couponCode || 'Coupon'}:</p>}
                     </div>
                     <div className='flex flex-col gap-1 font-medium text-right'>
                         <div className="flex items-center gap-1">
                             <RiyalIcon size={12} />
                             <span>{totalPrice.toLocaleString()}</span>
                         </div>
-                        <p>Free</p>
+                        <p>{dictionary.general?.free || 'Free'}</p>
                         {coupon && <div className="flex items-center gap-1">
                             <span>-</span>
                             <RiyalIcon size={12} />

@@ -9,8 +9,13 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSafeSelector } from "@/lib/hooks/useSafeSelector";
 import RiyalIcon from "@/components/RiyalIcon";
+import { useParams } from "next/navigation";
+import { getDictionary } from '@/components/internationalization/dictionaries.js';
 
 export default function Cart() {
+
+    const { lang } = useParams()
+    const [dictionary, setDictionary] = useState({});
     
     const { cartItems } = useSafeSelector(state => state?.cart, { cartItems: {} });
     const products = useSafeSelector(state => state?.product?.list, []);
@@ -40,28 +45,37 @@ export default function Cart() {
         dispatch(deleteItemFromCart({ productId }))
     }
 
+    const fetchDictionary = async () => {
+        const dict = await getDictionary(lang);
+        setDictionary(dict);
+    }
+
     useEffect(() => {
         if (products.length > 0) {
             createCartArray();
         }
     }, [cartItems, products]);
 
+    useEffect(() => {
+        fetchDictionary()
+    }, [lang]);
+
     return cartArray.length > 0 ? (
         <div className="min-h-screen mx-6 text-slate-800">
 
             <div className="max-w-7xl mx-auto ">
                 {/* Title */}
-                <PageTitle heading="My Cart" text="items in your cart" linkText="Add more" />
+                <PageTitle heading={dictionary.navigation?.cart || "My Cart"} text={dictionary.cart?.items || "items in your cart"} linkText={dictionary.general?.add || "Add more"} />
 
                 <div className="flex items-start justify-between gap-5 max-lg:flex-col">
 
                     <table className="w-full max-w-4xl text-slate-600 table-auto">
                         <thead>
                             <tr className="max-sm:text-sm">
-                                <th className="text-left">Product</th>
-                                <th>Quantity</th>
-                                <th>Total Price</th>
-                                <th className="max-md:hidden">Remove</th>
+                                <th className="text-left">{dictionary.product?.product || "Product"}</th>
+                                <th>{dictionary.product?.quantity || "Quantity"}</th>
+                                <th>{dictionary.cart?.total || "Total Price"}</th>
+                                <th className="max-md:hidden">{dictionary.forms?.remove || "Remove"}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,13 +114,13 @@ export default function Cart() {
                             }
                         </tbody>
                     </table>
-                    <OrderSummary totalPrice={totalPrice} items={cartArray} />
+                    <OrderSummary totalPrice={totalPrice} items={cartArray} dictionary={dictionary} />
                 </div>
             </div>
         </div>
     ) : (
         <div className="min-h-[80vh] mx-6 flex items-center justify-center text-slate-400">
-            <h1 className="text-2xl sm:text-4xl font-semibold">Your cart is empty</h1>
+            <h1 className="text-2xl sm:text-4xl font-semibold">{dictionary.cart?.emptyCart || "Your cart is empty"}</h1>
         </div>
     )
 }
