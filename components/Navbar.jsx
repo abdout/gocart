@@ -23,11 +23,12 @@ const Navbar = ({ dictionary, currentLocale }) => {
             <div className="mx-6">
                 <div className="flex items-center justify-between max-w-7xl mx-auto py-4  transition-all">
 
-                    <Link href={`/${currentLocale}`} className="relative text-4xl font-semibold text-slate-700">
-                        <span className="text-green-600">go</span>cart<span className="text-green-600 text-5xl leading-0">.</span>
-                        <p className="absolute text-xs font-semibold -top-1 -right-8 px-3 p-0.5 rounded-full flex items-center gap-2 text-white bg-green-500">
-                            plus
-                        </p>
+                    <Link href={`/${currentLocale}`} className="text-4xl font-semibold text-slate-700">
+                        {currentLocale === 'ar' ? (
+                            <span>س<span className="text-green-600">و</span><span className="text-green-600">ق</span></span>
+                        ) : (
+                            <span>sou<span className="text-green-600">q</span></span>
+                        )}
                     </Link>
 
                     {/* Desktop Menu */}
@@ -64,9 +65,19 @@ const Navbar = ({ dictionary, currentLocale }) => {
 
                     </div>
 
-                    {/* Mobile User Button  */}
-                    <div className="sm:hidden">
-                        <button className="px-7 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-sm transition text-white rounded-full">
+                    {/* Mobile Menu */}
+                    <div className="sm:hidden flex items-center gap-3">
+                        {/* Language Switcher Mobile */}
+                        <div className="flex gap-1 text-xs">
+                            <Link href={getSwitchLocaleHref('en')} className={`px-2 py-1 rounded ${currentLocale === 'en' ? 'bg-indigo-100 text-indigo-700' : 'hover:bg-gray-100'}`}>
+                                🇺🇸 EN
+                            </Link>
+                            <Link href={getSwitchLocaleHref('ar')} className={`px-2 py-1 rounded ${currentLocale === 'ar' ? 'bg-indigo-100 text-indigo-700' : 'hover:bg-gray-100'}`}>
+                                🇸🇦 AR
+                            </Link>
+                        </div>
+
+                        <button className="px-6 py-1.5 bg-indigo-500 hover:bg-indigo-600 text-sm transition text-white rounded-full">
                             {dictionary?.navigation?.login || 'Login'}
                         </button>
                     </div>
