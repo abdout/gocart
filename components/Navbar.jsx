@@ -2,21 +2,16 @@
 import { Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useSafeSelector } from '@/lib/hooks/useSafeSelector';
 import { useSwitchLocaleHref } from '@/components/internationalization/use-locale.js';
 
 const Navbar = ({ dictionary, currentLocale }) => {
-    const [isClient, setIsClient] = useState(false)
     const router = useRouter();
     const getSwitchLocaleHref = useSwitchLocaleHref();
 
     const [search, setSearch] = useState('')
-    const cartCount = useSelector(state => state?.cart?.total || 0)
-
-    useEffect(() => {
-        setIsClient(true)
-    }, [])
+    const cartCount = useSafeSelector(state => state?.cart?.total, 0)
 
     const handleSearch = (e) => {
         e.preventDefault()
@@ -50,7 +45,7 @@ const Navbar = ({ dictionary, currentLocale }) => {
                         <Link href={`/${currentLocale}/cart`} className="relative flex items-center gap-2 text-slate-600">
                             <ShoppingCart size={18} />
                             {dictionary?.navigation?.cart || 'Cart'}
-                            <button className="absolute -top-1 left-3 text-[8px] text-white bg-slate-600 size-3.5 rounded-full">{isClient ? cartCount : 0}</button>
+                            <button className="absolute -top-1 left-3 text-[8px] text-white bg-slate-600 size-3.5 rounded-full">{cartCount}</button>
                         </Link>
 
                         {/* Language Switcher */}

@@ -1,32 +1,11 @@
 'use client'
-import { useEffect, useState } from 'react'
 import Title from './Title'
 import ProductCard from './ProductCard'
-import { useSelector } from 'react-redux'
+import { useSafeSelector } from '@/lib/hooks/useSafeSelector'
 
 const BestSelling = ({ dictionary, lang }) => {
-    const [isClient, setIsClient] = useState(false)
     const displayQuantity = 8
-    const products = useSelector(state => state?.product?.list || [])
-
-    useEffect(() => {
-        setIsClient(true)
-    }, [])
-
-    if (!isClient) {
-        return (
-            <div className='px-6 my-30 max-w-6xl mx-auto'>
-                <Title title={dictionary?.bestSelling || 'Best Selling'} description="Loading products..." href={`/${lang}/shop`} />
-                <div className='mt-12 grid grid-cols-2 sm:flex flex-wrap gap-6 xl:gap-12'>
-                    {/* Placeholder content during SSR */}
-                    <div className="animate-pulse bg-gray-200 h-64 w-48 rounded"></div>
-                    <div className="animate-pulse bg-gray-200 h-64 w-48 rounded"></div>
-                    <div className="animate-pulse bg-gray-200 h-64 w-48 rounded"></div>
-                    <div className="animate-pulse bg-gray-200 h-64 w-48 rounded"></div>
-                </div>
-            </div>
-        )
-    }
+    const products = useSafeSelector(state => state?.product?.list, [])
 
     return (
         <div className='px-6 my-30 max-w-6xl mx-auto'>
