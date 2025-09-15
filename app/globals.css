@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 @layer components {
     @keyframes marqueeScroll {
@@ -14,6 +15,33 @@
 @layer base {
     button {
         cursor: pointer;
+    }
+
+    /* RTL Support */
+    [dir="rtl"] {
+        font-family: 'Rubik', sans-serif;
+    }
+
+    .font-arabic {
+        font-family: 'Rubik', sans-serif;
+    }
+
+    /* RTL-specific utilities */
+    [dir="rtl"] .rtl\:space-x-reverse > * + * {
+        margin-right: var(--tw-space-x);
+        margin-left: 0;
+    }
+
+    [dir="rtl"] .rtl\:text-right {
+        text-align: right;
+    }
+
+    [dir="rtl"] .rtl\:ml-auto {
+        margin-left: auto;
+    }
+
+    [dir="rtl"] .rtl\:mr-auto {
+        margin-right: auto;
     }
 }
 

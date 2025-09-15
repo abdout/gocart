@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "title": "GoCart - Multi-Vendor E-commerce Platform",
+    "description": "Professional multi-vendor e-commerce platform for Saudi Arabia"
+  },
+  "navigation": {
+    "home": "Home",
+    "shop": "Shop",
+    "cart": "Cart",
+    "about": "About",
+    "contact": "Contact",
+    "login": "Login",
+    "searchPlaceholder": "Search products"
+  },
+  "hero": {
+    "title": "Gadgets you'll love. Prices you'll trust.",
+    "subtitle": "Your ultimate multi-vendor e-commerce destination",
+    "viewMore": "View More"
+  },
+  "products": {
+    "title": "Latest Products",
+    "bestSelling": "Best Selling"
+  },
+  "specs": {
+    "title": "Our Specifications"
+  },
+  "newsletter": {
+    "title": "Join Newsletter",
+    "description": "Subscribe to get exclusive deals, new arrivals, and insider updates delivered straight to your inbox every week."
+  },
+  "footer": {
+    "description": "Welcome to gocart, your ultimate destination for the latest and smartest gadgets. From smartphones and smartwatches to essential accessories, we bring you the best in innovation — all in one place.",
+    "copyright": "Copyright 2025 © gocart All Right Reserved.",
+    "sections": {
+      "products": {
+        "title": "PRODUCTS",
+        "items": ["Earphones", "Headphones", "Smartphones", "Laptops"]
+      },
+      "website": {
+        "title": "WEBSITE",
+        "home": "Home",
+        "privacy": "Privacy Policy",
+        "plus": "Become Plus Member",
+        "createStore": "Create Your Store"
+      },
+      "contact": {
+        "title": "CONTACT",
+        "email": "sales@databayt.org",
+        "phone": "+966 55 772 1603",
+        "location": "Riyadh, Saudi Arabia"
+      }
+    }
+  },
+  "banner": {
+    "message": "Get 20% OFF on Your First Order!"
+  }
+}
