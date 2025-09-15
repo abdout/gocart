@@ -3,13 +3,16 @@ import { dummyStoreDashboardData } from "@/assets/assets"
 import Loading from "@/components/Loading"
 import { CircleDollarSignIcon, ShoppingBasketIcon, StarIcon, TagsIcon } from "lucide-react"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import RiyalIcon from "@/components/RiyalIcon"
+import { getDictionary } from '@/components/internationalization/dictionaries.js';
 
 export default function Dashboard() {
 
     const router = useRouter()
+    const { lang } = useParams()
+    const [dictionary, setDictionary] = useState({})
 
     const [loading, setLoading] = useState(true)
     const [dashboardData, setDashboardData] = useState({
@@ -20,10 +23,10 @@ export default function Dashboard() {
     })
 
     const dashboardCardsData = [
-        { title: 'Total Products', value: dashboardData.totalProducts, icon: ShoppingBasketIcon, showCurrency: false },
-        { title: 'Total Earnings', value: dashboardData.totalEarnings, icon: CircleDollarSignIcon, showCurrency: true },
-        { title: 'Total Orders', value: dashboardData.totalOrders, icon: TagsIcon, showCurrency: false },
-        { title: 'Total Ratings', value: dashboardData.ratings.length, icon: StarIcon, showCurrency: false },
+        { title: dictionary.store?.totalProducts || 'Total Products', value: dashboardData.totalProducts, icon: ShoppingBasketIcon, showCurrency: false },
+        { title: dictionary.store?.totalEarnings || 'Total Earnings', value: dashboardData.totalEarnings, icon: CircleDollarSignIcon, showCurrency: true },
+        { title: dictionary.store?.totalOrders || 'Total Orders', value: dashboardData.totalOrders, icon: TagsIcon, showCurrency: false },
+        { title: dictionary.store?.totalRatings || 'Total Ratings', value: dashboardData.ratings.length, icon: StarIcon, showCurrency: false },
     ]
 
     const fetchDashboardData = async () => {
@@ -31,15 +34,21 @@ export default function Dashboard() {
         setLoading(false)
     }
 
+    const fetchDictionary = async () => {
+        const dict = await getDictionary(lang);
+        setDictionary(dict);
+    }
+
     useEffect(() => {
         fetchDashboardData()
-    }, [])
+        fetchDictionary()
+    }, [lang])
 
     if (loading) return <Loading />
 
     return (
         <div className=" text-slate-500 mb-28">
-            <h1 className="text-2xl">Seller <span className="text-slate-800 font-medium">Dashboard</span></h1>
+            <h1 className="text-2xl">{dictionary.store?.seller || 'Seller'} <span className="text-slate-800 font-medium">{dictionary.store?.dashboard || 'Dashboard'}</span></h1>
 
             <div className="flex flex-wrap gap-5 my-10 mt-4">
                 {
@@ -64,7 +73,7 @@ export default function Dashboard() {
                 }
             </div>
 
-            <h2>Total Reviews</h2>
+            <h2>{dictionary.store?.totalReviews || 'Total Reviews'}</h2>
 
             <div className="mt-5">
                 {
@@ -90,7 +99,7 @@ export default function Dashboard() {
                                         ))}
                                     </div>
                                 </div>
-                                <button onClick={() => router.push(`/product/${review.product.id}`)} className="bg-slate-100 px-5 py-2 hover:bg-slate-200 rounded transition-all">View Product</button>
+                                <button onClick={() => router.push(`/${lang}/product/${review.product.id}`)} className="bg-slate-100 px-5 py-2 hover:bg-slate-200 rounded transition-all">{dictionary.store?.viewProduct || 'View Product'}</button>
                             </div>
                         </div>
                     ))

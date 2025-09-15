@@ -182,5 +182,28 @@
     "Earbuds": "سماعات الأذن",
     "Mouse": "فأرة",
     "Decoration": "ديكور"
+  },
+  "store": {
+    "seller": "البائع",
+    "dashboard": "لوحة التحكم",
+    "totalProducts": "إجمالي المنتجات",
+    "totalEarnings": "إجمالي الأرباح",
+    "totalOrders": "إجمالي الطلبات",
+    "totalRatings": "إجمالي التقييمات",
+    "totalReviews": "إجمالي المراجعات",
+    "viewProduct": "عرض المنتج",
+    "addProduct": "إضافة منتج",
+    "manageProducts": "إدارة المنتجات",
+    "orders": "الطلبات"
+  },
+  "admin": {
+    "admin": "المدير",
+    "dashboard": "لوحة التحكم",
+    "stores": "المتاجر",
+    "approve": "الموافقة",
+    "coupons": "الكوبونات",
+    "totalStores": "إجمالي المتاجر",
+    "pendingApprovals": "الموافقات المعلقة",
+    "activeCoupons": "الكوبونات النشطة"
   }
 }

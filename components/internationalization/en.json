@@ -159,5 +159,28 @@
     "Earbuds": "Earbuds",
     "Mouse": "Mouse",
     "Decoration": "Decoration"
+  },
+  "store": {
+    "seller": "Seller",
+    "dashboard": "Dashboard",
+    "totalProducts": "Total Products",
+    "totalEarnings": "Total Earnings",
+    "totalOrders": "Total Orders",
+    "totalRatings": "Total Ratings",
+    "totalReviews": "Total Reviews",
+    "viewProduct": "View Product",
+    "addProduct": "Add Product",
+    "manageProducts": "Manage Products",
+    "orders": "Orders"
+  },
+  "admin": {
+    "admin": "Admin",
+    "dashboard": "Dashboard",
+    "stores": "Stores",
+    "approve": "Approve",
+    "coupons": "Coupons",
+    "totalStores": "Total Stores",
+    "pendingApprovals": "Pending Approvals",
+    "activeCoupons": "Active Coupons"
   }
 }
